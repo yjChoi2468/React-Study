@@ -50,13 +50,22 @@ class App extends Component {
         });
     };
 
+    handleRemove = id => {
+        const { todos } = this.state;
+        const index = todos.findIndex(todo => todo.id === id);
+
+        this.setState({
+            todos: [...todos.slice(0, index), ...todos.slice(index + 1)]
+        });
+    };
+
     render() {
         const { input, todos } = this.state;
-        const { handleChange, handleInsert, handleToggle } = this;
+        const { handleChange, handleInsert, handleToggle, handleRemove } = this;
         return (
             <PageTemplate>
                 <TodoInput onChange={handleChange} onInsert={handleInsert} value={input} />
-                <TodoList todos={todos} onToggle={handleToggle} />
+                <TodoList todos={todos} onToggle={handleToggle} onRemove={this.handleRemove} />
             </PageTemplate>
         );
     }
