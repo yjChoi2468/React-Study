@@ -12,6 +12,11 @@ class App extends Component {
         };
     }
 
+    _id = 1;
+    _getId = () => {
+        return ++this._id;
+    };
+
     handleChange = e => {
         const { value } = e.target;
         this.setState({
@@ -19,12 +24,25 @@ class App extends Component {
         });
     };
 
+    handleInsert = () => {
+        const { todos, input } = this.state;
+        const newTodo = {
+            text: input,
+            done: false,
+            id: this._getId()
+        };
+        this.setState({
+            todos: [...todos, newTodo],
+            input: ''
+        });
+    };
+
     render() {
         const { input, todos } = this.state;
-        const { handleChange } = this;
+        const { handleChange, handleInsert } = this;
         return (
             <PageTemplate>
-                <TodoInput onChange={handleChange} value={input} />
+                <TodoInput onChange={handleChange} onInsert={handleInsert} value={input} />
                 <TodoList todos={todos} />
             </PageTemplate>
         );
