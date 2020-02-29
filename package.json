@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "immer": "^5.3.6",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5"
   }
